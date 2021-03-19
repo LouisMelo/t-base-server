@@ -1,6 +1,7 @@
 const express = require('express')
 const transactions = require('./routes/transactions')
 const signUp = require('./routes/signUp')
+const signIn = require('./routes/signIn')
 const mongoose = require('mongoose')
 const cors = require('cors')
 const app = express()
@@ -12,6 +13,7 @@ app.use(express.json())
 
 app.use('/api/transactions', transactions)
 app.use('/api/signup', signUp)
+app.use('/api/signin', signIn)
 
 app.get('/', (req, res) => {
   res.send('Welcome to apis')
