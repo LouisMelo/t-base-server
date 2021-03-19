@@ -52,4 +52,20 @@ router.post('/', async (req, res) => {
   }
 })
 
+router.delete('/:id', async (req, res) => {
+  const transaction = await Transaction.findById(req.params.id)
+
+  if (!transaction) {
+    return res.status(400).send('未找到对应交易记录...')
+  }
+
+  if (transaction.uid !== req.body.uid) {
+    return res.status(401).send('无权限删除此条记录...')
+  }
+
+  const deletedTransaction = await Transaction.findByIdAndDelete(req.params.id)
+
+  res.send(deletedTransaction)
+})
+
 module.exports = router
