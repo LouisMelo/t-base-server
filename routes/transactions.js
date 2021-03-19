@@ -1,5 +1,6 @@
 const { Transaction } = require('../models/transaction')
 const express = require('express')
+const Joi = require('joi')
 
 const router = express.Router()
 
@@ -15,6 +16,20 @@ const router = express.Router()
  * mergerId
  */
 router.post('/', async (req, res) => {
+  const schema = Joi.object({
+    type: Joi.string().valid('b', 's').required(),
+    price: Joi.number().min(0).required(),
+    amount: Joi.number().min(0).required(),
+    uid: Joi.string().required(),
+    code: Joi.string().max(6).required()
+  })
+
+  const { error } = schema.validate(req.body)
+
+  if (error) {
+    return res.status(400).send(error.details[0].message)
+  }
+
   const { type, price, amount, uid, date, code, note } = req.body
 
   let transaction = new Transaction({
