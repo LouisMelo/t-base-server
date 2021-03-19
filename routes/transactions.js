@@ -4,17 +4,18 @@ const Joi = require('joi')
 
 const router = express.Router()
 
-/**
- * type
- * price
- * amount
- * uid
- * date
- * code
- * note
- * isComplete
- * mergerId
- */
+// 获取用户的 transaction
+router.get('/', async (req, res) => {
+  const { uid } = req.body
+
+  try {
+    const transactions = await Transaction.find({ uid, isComplete: false }).sort({ date: -1 })
+    res.send(transactions)
+  } catch (error) {
+    res.status(500).send('Error: ' + error.message)
+  }
+})
+
 router.post('/', async (req, res) => {
   const schema = Joi.object({
     type: Joi.string().valid('b', 's').required(),
