@@ -16,7 +16,7 @@ const transactionSchema = new mongoose.Schema({
   price: Number,
   amount: Number,
   uid: String,
-  date: { type: Date, default: new Date() },
+  date: Date,
   code: String,
   note: String,
   isComplete: { type: Boolean, default: false },

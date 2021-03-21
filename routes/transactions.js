@@ -40,7 +40,7 @@ router.post('/', auth, async (req, res) => {
     type,
     price,
     amount,
-    date,
+    date: date || new Date(),
     code,
     note
   })

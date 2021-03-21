@@ -10,7 +10,7 @@ const mergerSchema = new mongoose.Schema({
   profit: { type: Number, required: true },
   transactionIds: [mongoose.Schema.Types.ObjectId],
   duration: Number,
-  date: { type: Date, default: new Date() }
+  date: Date
 })
 
 const Merger = mongoose.model('Merger', mergerSchema);

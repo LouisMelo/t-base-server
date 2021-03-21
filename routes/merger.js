@@ -33,7 +33,7 @@ router.post('/', auth, async (req, res) => {
     uid: req.user._id,
     profit,
     transactionIds,
-    // todo: duration
+    date: new Date()
   })
 
   try {
