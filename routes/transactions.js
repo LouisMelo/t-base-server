@@ -10,6 +10,7 @@ router.get('/', auth, async (req, res) => {
   try {
     const transactions = await Transaction.find({
       uid: req.user._id,
+      isComplete: false,
     }).sort({ date: -1 })
     res.send(transactions)
   } catch (error) {
