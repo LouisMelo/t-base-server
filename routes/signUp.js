@@ -2,6 +2,7 @@ const express = require('express')
 const { User } = require('../models/user')
 const Joi = require('joi')
 const bcrypt = require('bcrypt')
+const jwt = require('jsonwebtoken')
 
 const router = express.Router()
 
@@ -38,7 +39,10 @@ router.post('/', async (req, res) => {
 
     await user.save()
 
-    res.send('用户创建成功...')
+    const jwtSecretKey = process.env.JWT_SECRET_KEY;
+    const token = jwt.sign({ _id: user._id, name: user.name, email: user.email }, jwtSecretKey)
+
+    res.send(token);
 
   } catch (error) {
     res.status(500).send(error.message)
