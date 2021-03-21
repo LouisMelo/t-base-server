@@ -15,7 +15,7 @@ app.use(express.json())
 app.use('/api/transactions', transactions)
 app.use('/api/signup', signUp)
 app.use('/api/signin', signIn)
-app.use('/api/merger', merger)
+app.use('/api/mergers', merger)
 
 app.get('/', (req, res) => {
   res.send('Welcome to apis')
