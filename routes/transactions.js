@@ -23,7 +23,8 @@ router.post('/', auth, async (req, res) => {
     type: Joi.string().valid('b', 's').required(),
     price: Joi.number().min(0).required(),
     amount: Joi.number().min(0).required(),
-    code: Joi.string().max(6).required()
+    code: Joi.string().max(6).required(),
+    date: Joi.date()
   })
 
   const { error } = schema.validate(req.body)
